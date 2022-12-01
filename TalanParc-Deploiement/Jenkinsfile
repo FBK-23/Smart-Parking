@@ -1,0 +1,92 @@
+pipeline {
+    agent any
+    environment {
+        nodeHome = tool name: 'node14', type: 'nodejs'
+        npmCMD = "${nodeHome}/npm"
+        nodeCMD = "${nodeHome}/node.exe"
+	}
+    stages {
+        stage('Git-Checkout') {
+            steps {
+                updateGitlabCommitStatus name: 'build', state: 'pending'
+                updateGitlabCommitStatus name: 'build', state: 'success'
+
+                //cleanWs()
+                  git credentialsId: '300b475b-68d2-4762-a744-ff7fcd6505d9', branch: "develop", url: 'http://gitlab.dom.tti/java-rd/TalanParcHelper.git'
+            
+                emailext (
+                  subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                  body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                    <p>Jenkins TalanParking pipeline started at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+                  recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+                )
+                emailext body: "Le déploiement de la nouvelle version du projet TalanParking est déclenché : Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", subject: "Jenkins TalanParking > STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", to: params.mailingList
+            }
+        }
+        
+        stage('Build Backend') { 
+         steps {
+           bat label: '', script: "cd Backend/GestionParking && ${npmCMD} install"
+           bat script: "echo SUCCESS Build Back "
+         }  
+        }
+    
+        stage('Build Frontend') {
+         steps {
+           bat label: '', script: "cd FrontEnd/angular && ${npmCMD} install"
+           bat script: "echo SUCCESS Build Front "
+
+         } 
+        }
+        stage('Preparing Transfert To Slave') {
+            steps {
+                   stash name:"TalanParking", excludes: "**/node_modules"
+                   bat script: "echo SUCCESS Transfert "
+        }
+        }
+  
+        stage ('Docker build push') {
+            agent { label 'tti140' }
+            steps {
+       
+                unstash "TalanParking"
+                sh label: 'Build image front', script: "cd /home/byblos/jenkins/jenkins-agent/workspace/TalanRD/TalanParking/FrontEnd/angular && docker build -t rd.talan.com:5443/TalanParking/TalanParking_client:latest ."
+                sh label: 'Push image front', script: "docker push  rd.talan.com:5443/TalanParking/TalanParking_client:latest"
+                sh label: 'Build image API', script: "cd /home/byblos/jenkins/jenkins-agent/workspace/TalanRD/TalanParking/Backend/GestionParking && docker build -t rd.talan.com:5443/TalanParking/TalanParking_api:latest ."
+                sh label: 'Push image API', script: "docker push rd.talan.com:5443/TalanParking/TalanParking_api:latest"
+                sh label: 'Delete image front From Slave', script: "docker rmi rd.talan.com:5443/TalanParking/TalanParking_client:latest --force"
+                sh label: 'Delete image API From Slave', script: "docker rmi rd.talan.com:5443/TalanParking/TalanParking_api:latest --force"
+                sh script: "echo success"
+            }
+        }
+        stage('Remote Server Deployment') {
+    		steps {
+				script {
+				    def remote = [:]
+                    remote.name = 'jenkins'
+                    remote.host = '51.15.164.79'
+                    remote.user = 'jenkins'
+                    remote.password = RemotePassword
+                    remote.allowAnyHosts = true
+                    remote.port = 22822
+				    sshCommand remote: remote, command: "echo Connection Success to Remote Server  !!!"	
+			        bat script: "echo Deployment BEGIN !!!"
+                    sshCommand remote: remote, command: "docker-compose -f /data/production/docker-env/TalanParking/docker-compose.yml down"
+                    sshCommand remote: remote, command: "docker-compose -f /data/production/docker-env/TalanParking/docker-compose.yml pull"
+                    sshCommand remote: remote, command: "docker-compose -f /data/production/docker-env/TalanParking/docker-compose.yml up -d --build"
+                    sshCommand remote: remote, command: "docker-compose -f /data/production/docker-env/TalanParking/docker-compose.yml ps"
+                    bat script: "echo Deployment FINISHED !!!"
+				}
+		    }
+	    }
+
+    }
+    post {
+        failure {
+            emailext attachLog: true, body: 'Problème rencontré lors de la compilation du projet TalanParking', subject: "Jenkins TalanParking > FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", to: params.mailingList
+        }
+        success {
+            emailext attachLog: true, body: "Job '${env.JOB_NAME} Success !", subject: "Jenkins > SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", to: params.mailingList
+        }
+    }
+}

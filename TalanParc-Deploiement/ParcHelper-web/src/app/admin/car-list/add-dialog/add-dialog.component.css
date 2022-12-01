@@ -1,0 +1,16 @@
+.addContainer{
+    width: 500px;
+    margin-top: 0px;
+}
+.titre{
+   font-weight: bolder; 
+   font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(4, 4, 9, 0.671);
+    font-size: 25px;
+}
+.car{
+    height: 150px;
+    width: 400px;
+    margin: auto;
+    
+  }

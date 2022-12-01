@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 35%;
+}
+.car{
+  height: 100px;
+  width: 200px;
+  float:left;
+  
+}
+.white-icon {
+  color: red;
+}
+  

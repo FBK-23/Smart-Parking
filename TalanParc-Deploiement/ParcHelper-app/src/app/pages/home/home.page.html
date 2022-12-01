@@ -1,0 +1,62 @@
+<ion-content>
+  <ion-toolbar class="tb"> 
+    <ion-title> Parking </ion-title>
+  </ion-toolbar>  
+
+  
+  <div  *ngIf="this.ocrService === 'executing'">
+    <ion-spinner ></ion-spinner>
+    <h3 class="spinner">En cours de traitement</h3>
+  </div>
+
+  <div class="main_content_div" *ngIf="this.ocrService === 'notExecuting'" >
+    
+    <div class="card_div" >
+      <h3 style="padding-top: 20px;">Ma voiture est bloquée<br></h3>
+      <hr>
+      <h3>
+        <ion-button (click)="capturePhoto()" class="main_content_div">
+          <ion-icon name="camera"></ion-icon>
+        </ion-button>
+      </h3>
+
+      <h3>
+        <hr class="hr-text" data-content="OU">
+        <ion-row >
+          <ion-col >
+            <ion-button fill="outline" [routerLink]="['/search-car']">
+              <ion-icon slot="start" name="car-sport-outline"></ion-icon>
+              Saisir manuellement</ion-button>
+            </ion-col>
+          </ion-row></h3><br>
+    </div>
+  </div>
+  
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        
+        <ion-tab-button (click)="logout()">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          <ion-label>Déconnexion</ion-label>
+        </ion-tab-button>
+      
+        <ion-tab-button [routerLink]="['/reset-password']">
+          <ion-icon name="settings-outline"></ion-icon>
+          <ion-label>Mot de passe</ion-label>
+        </ion-tab-button>
+
+
+
+        <ion-tab-button [routerLink]="['/car-list']">
+          <ion-icon name="car-sport-outline"></ion-icon>
+          <ion-label>Mes voitures</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

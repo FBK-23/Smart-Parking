@@ -1,0 +1,151 @@
+<div class="addContainer">
+    <div class="modalHeader mb-3">
+      <div class="editRowModal" >
+        
+          <div class="titre">
+            {{this.action}} une véhicule
+          </div>
+        </div>
+      
+      <button mat-mini-fab color="warn" (click)="closeDiag()">
+        <mat-icon class="col-white">close</mat-icon>
+      </button>
+    </div>
+    <img src="assets/images/car.gif" alt="description of gif" class="car">
+    <div >
+      <form class="register-form " [formGroup]="selectedCarForm" >
+        <!--<div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error>
+                  Email est obligatoire !
+                </mat-error>
+              </mat-form-field>
+          </div>
+          
+        </div>-->
+         <!-- Type -->
+         <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-select placeholder="Type de matricule" formControlName="type" required>
+              <mat-option value="TUN"> TUN  تونس</mat-option>
+             <!--<mat-option value="RS">RS</mat-option>-->
+             <!--<mat-option value="DOUANE">DOUANE</mat-option>-->
+             <!-- <mat-option value="ETAT">ETAT</mat-option>-->
+              <mat-option value="FCR"> FCR  ن ت  </mat-option>
+            
+            </mat-select>
+              <mat-icon matSuffix>bookmark_border</mat-icon>
+              <mat-error >
+                La séléction est obligatoire !
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div *ngIf="selectedCarForm.get('type').value ==='TUN'">
+          <div class="row">
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label> Ex: 99 </mat-label>
+                <input matInput formControlName="matriculeLeft" required>
+                <mat-icon matSuffix>directions_car</mat-icon>
+                <mat-error>
+                  Champ obligatoire !
+                </mat-error>
+              </mat-form-field>
+            </div>
+  
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mt-2">
+              <div class="card card-statistic-2" style="text-align: center ;padding-top: 9px;font-size: 20px;background-color: rgba(169, 171, 172, 0.262);">
+              TUN
+              </div>
+            </div>
+           
+            <div class=" col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Ex: 9999</mat-label>
+                <input matInput formControlName="matriculeRight" required>
+                <mat-icon matSuffix>directions_car</mat-icon>
+                <mat-error>
+                  Champ obligatoire !
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          </div>
+
+          <div *ngIf="selectedCarForm.get('type').value ==='FCR'">
+            <div class="row">        
+                    
+            <div class=" col-xl-9 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Ex: 9999</mat-label>
+                <input matInput [formControlName]="'matriculeRS'" required>
+                <mat-icon matSuffix>directions_car</mat-icon>
+                <mat-error>
+                  Champ obligatoire !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mt-2">
+              <div class="card card-statistic-2" style="text-align: center ;padding-top: 9px;font-size: 20px;background-color: rgba(6, 155, 230, 0.262);">
+                ن ت 
+              </div>
+            </div>
+          </div>  
+          </div>
+
+
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Marque</mat-label>
+              <input matInput formControlName="marque" required>
+              <mat-icon matSuffix>airport_shuttle</mat-icon>
+              <mat-error >
+                Marque est obligatoire !
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline" >
+              <mat-label> Batiment </mat-label>
+              <mat-select formControlName="batiment" required>
+                <mat-option *ngFor="let b of batiments" [value]="b" >
+                  {{b}}
+                </mat-option>
+              </mat-select>
+              <mat-icon matSuffix>apartment</mat-icon>
+              <mat-error>
+                Champ obligatoire !
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        
+
+
+
+
+
+        <div class="float-end mt-5">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              
+              <button mat-raised-button color="warn" (click)="closeDiag()">Annuler</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!selectedCarForm.valid"
+              (click)="addCar(selectedCarForm.value)" > {{this.action}} </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

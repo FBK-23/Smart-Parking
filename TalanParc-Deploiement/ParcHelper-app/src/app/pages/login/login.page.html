@@ -1,0 +1,47 @@
+<ion-content>
+  <ion-toolbar> 
+    <ion-title>  </ion-title>
+  </ion-toolbar>
+  
+  <div id="header">
+    <img src="assets/icon/car6.gif">
+  </div>
+  <form [formGroup]="formGroup" (ngSubmit)="login(formGroup.value)" id="loginform">
+    <ion-item lines="full">
+     
+      <ion-input formControlName="email" type="text" placeholder="Email"></ion-input> 
+      <ion-icon class="show-option" name="mail-outline"></ion-icon>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message" *ngIf="formGroup.get('email').hasError(validation.type) 
+        && (formGroup.get('email').dirty || formGroup.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item>
+      <app-show-hide-password>
+        <ion-input formControlName="password" type="password" placeholder="Mot de passe"></ion-input>
+      </app-show-hide-password>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message" *ngIf="formGroup.get('password').hasError(validation.type) 
+        && (formGroup.get('password').dirty || formGroup.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-button type="submit" color="primary" expand="block"  [disabled]="!formGroup.valid">Se connecter</ion-button>
+    <ion-row>
+      
+      <ion-col> 
+        <a [routerLink]="['/forgot-password']" > Mot de passe oublié ?</a><br>
+        <a [routerLink]="['/registration']" >Créer un compte.</a>
+      </ion-col>
+
+    </ion-row>
+  </form>
+</ion-content>

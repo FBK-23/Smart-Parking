@@ -1,0 +1,102 @@
+<div class="addContainer">
+    <div class="modalHeader mb-3">
+      <div class="editRowModal" >
+        
+          <div class="titre">
+            {{this.action}} un conducteur
+          </div>
+        </div>
+      
+      <button mat-mini-fab color="warn" (click)="closeDiag()">
+        <mat-icon class="col-white">close</mat-icon>
+      </button>
+    </div>
+    <img src="assets/images/car.gif" alt="description of gif" class="car">
+    <div >
+      <form class="register-form " [formGroup]="selectedCarForm" >
+
+        <div class="row">
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="firstName" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error >
+                  Prénom est obligatoire !
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="lastName" required>
+                <mat-icon matSuffix>group</mat-icon>
+                <mat-error >
+                  Nom est obligatoire !
+                </mat-error>
+              </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required>
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error>
+                  Email est obligatoire !
+                </mat-error>
+              </mat-form-field>
+          </div>
+          
+        </div>
+
+
+        <div class="row">
+          <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input matInput formControlName="telephone" required>
+              <mat-icon matSuffix>phone</mat-icon>
+              <mat-error >
+                Téléphone est obligatoire !
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          
+          <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline" >
+              <mat-label> Batiment </mat-label>
+              <mat-select formControlName="batiment" required>
+                <mat-option *ngFor="let b of batiments" [value]="b" >
+                  {{b}}
+                </mat-option>
+              </mat-select>
+              <mat-icon matSuffix>apartment</mat-icon>
+              <mat-error>
+                Champ obligatoire !
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+        </div>
+       
+        
+        
+        <div class="float-end mt-5">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              
+              <button mat-raised-button color="warn" (click)="closeDiag()">Annuler</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!selectedCarForm.valid"
+              (click)="actionFunction()" > {{this.action}} </button>
+              
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,56 @@
+<ion-content>
+  <ion-toolbar class="tb">
+    <ion-title></ion-title>
+  </ion-toolbar>
+
+  <div *ngIf="length != 0">
+    <div class="main_content_div">
+        <div class="card_div" *ngFor="let item of list">
+          <button class="delete" (click)="deleteCar(item._id)">
+          <ion-icon name="trash-outline" ></ion-icon>
+          </button>
+          <h3>{{item.Car.matricule}}</h3>
+          <h4>Marque : {{item.Car.marque}}</h4>
+          <h4>Batiment : {{item.Car.batiment}}</h4>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="length == 0">
+    <div class="main_content_div">
+        <div class="card_div">
+          <br><br><br>
+          <h3>Vous n'avez pas encore <br>ajouté une véhicule !<br>
+            <br><br><br></h3>
+        </div>
+    </div>
+  </div>
+
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+    
+    
+        
+        
+        <ion-tab-button [routerLink]="['/home']" >
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Accueil</ion-label>
+        </ion-tab-button>
+    
+        
+        
+        <ion-tab-button [routerLink]="['/add-car']">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          <ion-label>Ajouter</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
+

@@ -1,0 +1,9 @@
+easyocr==1.6.2
+fastapi==0.85.1
+imutils==0.5.4
+keras==2.10.0
+matplotlib==3.6.1
+numpy==1.23.4
+Pillow==9.2.0
+opencv_python_headless==4.5.4.60
+tensorflow

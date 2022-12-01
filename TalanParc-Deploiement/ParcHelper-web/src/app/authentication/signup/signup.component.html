@@ -1,0 +1,104 @@
+<div class="auth-container">
+  <div class="row auth-main">
+    <div class="col-sm-6 px-0 d-none d-sm-block">
+      <div class="left-img" style="background-image: url(assets/images/pages/login.jpg);">
+      </div>
+    </div>
+    <div class="col-sm-6 auth-form-section">
+      <div class="form-section">
+        <div class="auth-wrapper">
+          <h2 class="welcome-msg"> S'inscrire </h2>
+          <p class="auth-signup-text text-muted">Entrez les détails pour créer un compte</p>
+          <form class="validate-form" [formGroup]="signUp" (ngSubmit)="onSubmit(signUp.value)">
+            <div class="row">
+              <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Prénom</mat-label>
+                  <input matInput formControlName="firstName" required>
+                  <mat-icon matSuffix>perm_identity</mat-icon>
+                  <mat-error *ngIf="signUp.get('firstName').hasError('required')">
+                     Prénom est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Nom</mat-label>
+                  <input matInput formControlName="lastName" required>
+                  <mat-icon matSuffix>face</mat-icon>
+                  <mat-error *ngIf="signUp.get('lastName').hasError('required')">
+                     Nom est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" required>
+                  <mat-icon matSuffix>mail</mat-icon>
+                  <mat-error *ngIf="signUp.get('email').hasError('required') || signUp.get('email').touched">
+                    Email est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Téléphone</mat-label>
+                  <input matInput formControlName="telephone" required>
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error *ngIf="signUp.get('telephone').hasError('required') || signUp.get('telephone').touched">
+                    Téléphone est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Mot de passe</mat-label>
+                  <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+                  <mat-icon matSuffix (click)="hide = !hide">
+                    {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <mat-error *ngIf="signUp.get('password').hasError('required')">
+                    Mot de passe est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Confirmer mot de passe</mat-label>
+                  <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'" required>
+                  <mat-icon matSuffix (click)="chide = !chide">
+                    {{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <mat-error *ngIf="signUp.get('cpassword').hasError('required')">
+                    Confirmation de mot de passe est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="flex-sb-m w-full  p-b-20">
+              <div>
+                <span>Déja inscrit ? <a routerLink="/authentication/signin">
+                    Se connecter
+                  </a></span>
+              </div>
+            </div>
+            <div class="container-auth-form-btn">
+              <button mat-flat-button color="primary" class="auth-form-btn" [disabled]="!signUp.valid " type="submit">
+                S'inscrire
+              </button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,49 @@
+version: "3"
+services:
+
+   parc-front:
+      container_name: parc-client
+      #build: FrontEnd/angular/.
+      image: rd.talan.com:5443/talanparking/talanparking_client:latest
+      restart: on-failure
+      ports:
+         - "4044:80"
+
+   parc-api:
+
+      #build: Backend/GestionParking/.
+      image: rd.talan.com:5443/talanparking/talanparking_api:latest
+      restart: on-failure
+      ports:
+         - "3000:3000"
+      container_name: parc-api
+      networks:
+        - network
+      volumes:
+         - ./Backend/GestionParking/public/images/qr/:/usr/src/app/public/images/qr/
+         - ./config-talanparc:/config-talanparc
+      depends_on:
+        - parc-db
+   parc-db:
+      image: mongo:latest
+      container_name: parc-db
+      environment:
+         - MONGO_INITDB_ROOT_USERNAME=talanparc
+         - MONGO_INITDB_ROOT_PASSWORD=talanparc
+      ports:
+         - "27014:27017"
+      networks:
+        - network
+      volumes:
+         - mongodbdata:/data/db2
+
+      command: mongod --port 27014
+networks:
+  network:
+    driver: bridge     
+volumes:
+
+  mongodbdata:     
+
+
+

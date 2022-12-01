@@ -1,0 +1,102 @@
+<ion-content>
+  <ion-toolbar class="tb"> 
+    <ion-title> Parking </ion-title>
+    
+  </ion-toolbar>
+  <div id="header">
+    <img src="assets/icon/11.gif">
+  </div>
+
+  
+  
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm(formGroup.value)" id="registrationform" >
+    <ion-item lines="full">
+      <ion-input formControlName="firstName" type="text" placeholder="Prénom"></ion-input>
+      <ion-icon class="show-option" name="person-outline"></ion-icon>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.firstName">
+        <div class="error-message" *ngIf="formGroup.get('firstName').hasError(validation.type) 
+        && (formGroup.get('firstName').dirty || formGroup.get('firstName').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item lines="full">
+      <ion-input formControlName="lastName" type="text" placeholder="Nom"></ion-input>
+      <ion-icon class="show-option" name="person-circle-outline"></ion-icon>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.lastName">
+        <div class="error-message" *ngIf="formGroup.get('lastName').hasError(validation.type) 
+        && (formGroup.get('lastName').dirty || formGroup.get('lastName').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item lines="full">
+      <ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
+      <ion-icon class="show-option" name="mail-outline"></ion-icon>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message" *ngIf="formGroup.get('email').hasError(validation.type) 
+        && (formGroup.get('email').dirty || formGroup.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item lines="full">
+      <ion-input formControlName="telephone" type="text" placeholder="Téléphone"></ion-input>
+      <ion-icon class="show-option" name="call-outline"></ion-icon>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.telephone">
+        <div class="error-message" *ngIf="formGroup.get('telephone').hasError(validation.type) 
+        && (formGroup.get('telephone').dirty || formGroup.get('telephone').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item lines="full">
+      <app-show-hide-password>
+        <ion-input formControlName="password" type="password" placeholder="Mot de passe"></ion-input>
+      </app-show-hide-password>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message" *ngIf="formGroup.get('password').hasError(validation.type) 
+        && (formGroup.get('password').dirty || formGroup.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    <ion-item lines="full">
+      <app-show-hide-password>
+        <ion-input formControlName="confirmPassword" type="password" placeholder="Confirmer mot de passe"></ion-input>
+      </app-show-hide-password>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.confirmPassword">
+        <div class="error-message" *ngIf="formGroup.get('confirmPassword').hasError(validation.type) 
+        && (formGroup.get('confirmPassword').dirty || formGroup.get('confirmPassword').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div><ion-button type="submit" color="tertiary" expand="block" [disabled]="!formGroup.valid">S'inscrire</ion-button>
+   
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button [routerLink]="['/login']">
+          <ion-icon name="log-in-outline"></ion-icon>
+          <ion-label>Se connecter</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

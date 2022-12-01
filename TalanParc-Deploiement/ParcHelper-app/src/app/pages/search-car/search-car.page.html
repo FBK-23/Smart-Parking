@@ -1,0 +1,90 @@
+<ion-content>
+  <ion-toolbar class="tb"> 
+    <ion-title></ion-title>
+  </ion-toolbar>
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+
+  <div id="header">
+    <img src="assets/icon/plates.png">
+  </div>
+
+
+  <form id="form" [formGroup]="formGroup" (ngSubmit)="SearchCarOwnerNumber()">
+
+    <ion-select lines="full" interface="action-sheet" placeholder="Type de matricule" formControlName="type">
+      <ion-select-option value="TUN">TUN &nbsp;&nbsp;&nbsp;  تونس</ion-select-option>
+      <ion-select-option value="FCR">FCR  &nbsp; &nbsp; &nbsp; ن ت</ion-select-option>
+    </ion-select>
+
+<div *ngIf="formGroup.get('type').value ==='TUN'">
+
+    <ion-item lines="full">
+      <ion-input  type="text"  formControlName="plateNumber1" placeholder=" 190 "></ion-input> 
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button  fill="outline" color="medium" disabled  style="margin-top: -70px;">TUN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; تونس</ion-button>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-item lines="full">
+      <ion-input  type="text" formControlName="plateNumber2" placeholder="9999"></ion-input> 
+    </ion-item>
+</div>    
+
+
+
+<div *ngIf="formGroup.get('type').value ==='FCR'">
+  <ion-item>
+    
+    <ion-input placeholder="1234565" formControlName="matriculeRS"><ion-icon class="show-option" name="car-sport-outline"></ion-icon></ion-input>
+    <ion-label> ن ت</ion-label>
+  </ion-item>
+
+</div>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" fill="outline" color="primary" expand="block" >
+          <ion-icon slot="start" name="search-outline">
+          </ion-icon> Chercher </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" >
+        
+        <ion-tab-button [routerLink]="['/home']" >
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          <ion-label>Retour</ion-label>
+        </ion-tab-button>
+    
+        
+        
+        <ion-tab-button [routerLink]="['/add-car']">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          <ion-label>Ajouter</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button [routerLink]="['/car-list']" >
+          <ion-icon name="car-sport-outline"></ion-icon>
+          <ion-label>Mes voitures</ion-label>
+        </ion-tab-button>
+
+
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

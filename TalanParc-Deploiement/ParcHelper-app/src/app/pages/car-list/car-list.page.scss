@@ -1,0 +1,115 @@
+ion-content{
+    --background:#ffffff;
+    #header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+    img{
+        width: 300px;
+        height:200px;
+        margin-top: -20px;
+    }
+    #form{
+        margin-top: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    ion-button{
+        margin-top: 30px;
+    }
+}
+ion-item{
+    border-radius: 5px;
+    height: 55px;
+    box-shadow: 1px 0px 8px 0px rgba(5, 29, 241, 0.425);
+    margin-bottom:20px;
+    
+
+    ion-input{
+        font-size:12 px;
+        --padding-top: 20px;
+        --padding-bottom:15px;
+        --padding-start:5px;
+    }
+    
+    
+   
+}
+.tb{
+    --background:	#0000ff4b;
+    height: 350px;
+    width: 450px;
+    background: linear-gradient(165deg, #00109c 10%,#25f8ff 100%);
+    box-shadow: 0px 1px 10px rgba(10, 10, 10, 0.5);
+    transform: rotate(-20deg);
+    border-radius: 10px 10px 10px 300px;
+    margin-top: -250px;
+    margin-bottom: 0px;
+    margin-left: -90px;
+}
+ion-title{
+    color:rgba(255, 255, 255, 0.945);
+    font-family: lato;
+}
+ion-col{
+    margin-top: 50px;
+    text-align: center;
+}
+a{
+    font-size: 14px;
+    letter-spacing: 0.5px;;
+    text-align: center;
+    text-decoration: none;
+    color: #0519c5;
+
+}
+.show-option,
+      .hide-option {
+        font-size: 1.2rem;
+        display: block;
+        padding-right: 23px;
+  // In case you want to use text instead of icons
+        &:not(ion-icon) {
+          text-transform: uppercase;
+          font-size: 1rem;
+        }
+      }
+
+      .main_content_div{
+        padding:16 px;
+        ion-label{
+            display: block;
+        }
+        .card_div{
+            border-radius: 5px; 
+            box-shadow: 1px 0px 8px 0px rgba(5, 29, 241, 0.497);
+            padding-left: 10px;
+            padding-bottom: 3px;
+            margin-bottom: 15px;
+            flex-direction: row;
+            margin-left: 15px;
+            margin-top: 5px;
+            margin-right: 15px;
+            h3{
+                color: rgb(2, 13, 175);
+                font-weight:bold;
+                text-align: center;
+                padding-top: 5px;
+            }
+            h4{
+                color: rgb(112, 112, 112);
+            }
+            .delete{
+                background-color: #ffffff00;
+                color: red;
+                font-size: 20px;
+                float: right;
+                margin-right: 20px;
+                margin-top: 60px;
+            }
+           
+        }
+      }
+ 

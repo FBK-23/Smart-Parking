@@ -1,0 +1,60 @@
+<nav #navbar class="navbar active" >
+  <div class="container-fluid" style="background-color: #0000f1;" >
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+      <ul class="float-start">
+        <li>
+          
+          <button mat-icon-button (click)="callSidemenuCollapse()"  style="padding-top: 11px; color: rgba(162, 217, 248, 0.437); color: rgb(255, 255, 255);">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Full Screen Button -->
+        <li class="fullscreen">
+          <button mat-icon-button (click)="callFullscreen()" class=" nav-notification-icons" style="color: rgb(255, 255, 255);">
+            <mat-icon>fullscreen</mat-icon>
+          </button>
+        </li>
+        <!-- #END# Full Screen Button -->
+       
+        <!-- #START# Notifications
+        <li class="nav-item" ngbDropdown><span class="label-count bg-orange" >{{this.notifications.length}}</span>
+          <button mat-icon-button ngbDropdownToggle  class="nav-notification-icons" >
+            
+            <mat-icon style="color: rgb(255, 255, 255);">notifications_none</mat-icon>
+           
+          </button>
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 700px; max-height: 300px;margin-top: 20px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li>
+                  <a href="#" *ngFor="let notification of notifications" onClick="return false;">
+                    <span class="table-img msg-user">
+                      <img src="{{notification.userImg}}" alt="">
+                    </span>
+                    <span class="menu-info">
+                      <span class="menu-title">{{notification.userName}}</span>
+                      <span class="menu-desc">
+                        <i class="material-icons">access_time</i> {{notification.time}}
+                      </span>
+                      <span class="menu-desc">{{notification.message}}</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+        </li>-->
+        
+        <!-- #END# Tasks -->
+        <li class="float-end" style="margin-right:30px ;color: rgb(255, 255, 255);">
+            <button mat-icon-button aria-label="Example icon button with a delete icon" (click)="logout()" class>
+              <mat-icon>power_settings_new</mat-icon>
+            </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,136 @@
+<ion-content>
+  <ion-toolbar class="tb">
+    <ion-title>add-car</ion-title>
+  </ion-toolbar>
+
+<div id="header">
+  <img src="assets/icon/1.png">
+</div>
+<form [formGroup]="formGroup" id="form">
+    
+  <ion-select lines="full" interface="action-sheet" placeholder="Type de matricule" formControlName="plateType">
+    <ion-select-option value="TUN">TUN &nbsp;&nbsp;&nbsp;  تونس</ion-select-option>
+    <ion-select-option value="FCR">FCR  &nbsp; &nbsp; &nbsp; ن ت</ion-select-option>
+  </ion-select>
+  
+
+    
+
+  <div *ngIf="formGroup.get('plateType').value ==='TUN'">
+
+    <ion-item lines="full">
+      <ion-input formControlName="plateLeft" type="text" placeholder="Ex: 190"></ion-input> 
+      <ion-icon class="show-option" name="car-sport-outline"></ion-icon>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.plateLeft">
+        <div class="error-message" *ngIf="formGroup.get('plateLeft').hasError(validation.type) 
+        && (formGroup.get('plateLeft').dirty || formGroup.get('plateLeft').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-row>
+      <ion-col>
+        <ion-button fill="outline" color="medium" disabled  style="margin-top: -10px;">TUN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; تونس</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-item lines="full">
+      <ion-input formControlName="plateRight" type="text" placeholder="Ex: 1234"></ion-input> 
+      <ion-icon class="show-option" name="car-sport-outline"></ion-icon>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.plateRight">
+        <div class="error-message" *ngIf="formGroup.get('plateRight').hasError(validation.type) 
+        && (formGroup.get('plateRight').dirty || formGroup.get('plateRight').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+
+
+
+  <div *ngIf="formGroup.get('plateType').value ==='FCR'">
+    <ion-item>
+
+      <ion-input formControlName="matricule" placeholder="1234565"><ion-icon class="show-option" name="car-sport-outline"></ion-icon></ion-input>
+      <ion-label> ن ت</ion-label>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.matricule">
+        <div class="error-message" *ngIf="formGroup.get('matricule').hasError(validation.type) 
+        && (formGroup.get('matricule').dirty || formGroup.get('matricule').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+
+
+
+  <ion-select lines="full" interface="action-sheet" formControlName="batiment" placeholder="Batiment">
+    <ion-select-option value="Bloc A">Bloc A</ion-select-option>
+    <ion-select-option value="Bloc B">Bloc B</ion-select-option>
+  </ion-select>
+  <div class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.plateRight">
+      <div class="error-message" *ngIf="formGroup.get('batiment').hasError(validation.type) 
+      && (formGroup.get('batiment').dirty || formGroup.get('batiment').touched)">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+  </div>
+
+
+  <ion-item lines="full">
+    <ion-input formControlName="marque" type="text" placeholder="Marque"></ion-input> 
+    <ion-icon class="show-option" name="bookmarks-outline"></ion-icon>
+  </ion-item>
+  <div class="validation-errors">
+    <ng-container *ngFor="let validation of validation_messages.marque">
+      <div class="error-message" *ngIf="formGroup.get('marque').hasError(validation.type) 
+      && (formGroup.get('marque').dirty || formGroup.get('marque').touched)">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+  </div>
+  
+  <ion-button type="submit" color="primary" expand="block"  (click)="addMyCar(formGroup.value)" >Ajouter</ion-button>
+  
+</form>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" >
+    
+    
+        
+        
+        <ion-tab-button [routerLink]="['/car-list']" >
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          <ion-label>Retour</ion-label>
+        </ion-tab-button>
+    
+        
+        
+        <ion-tab-button [routerLink]="['/home']">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Accueil</ion-label>
+        </ion-tab-button>
+        
+
+
+
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
